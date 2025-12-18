@@ -60,7 +60,15 @@ jobs:
 
       - name: Build iOS App (Unsign)
         run: |
-          flutter build ios --release --no-codesign
+          flutter build ios --release --no-codesign \
+            --dart-define=MAIMAI_NET_API_AES_KEY="${{ secrets.MAIMAI_NET_API_AES_KEY }}" \
+            --dart-define=MAIMAI_NET_API_AES_IV="${{ secrets.MAIMAI_NET_API_AES_IV }}" \
+            --dart-define=MAIMAI_NET_API_OBFUSCATE_PARAM="${{ secrets.MAIMAI_NET_API_OBFUSCATE_PARAM }}" \
+            --dart-define=MAIMAI_NET_API_KEYCHIP_ID="${{ secrets.MAIMAI_NET_API_KEYCHIP_ID }}" \
+            --dart-define=MAIMAI_NET_API_SALT="${{ secrets.MAIMAI_NET_API_SALT }}" \
+            --dart-define=MAIMAI_NET_API_OPEN_GAME_ID="${{ secrets.MAIMAI_NET_API_OPEN_GAME_ID }}" \
+            --dart-define=MAIMAI_NET_API_CHIME_ENDPOINT="${{ secrets.MAIMAI_NET_API_CHIME_ENDPOINT }}" \
+            --dart-define=MAIMAI_NET_API_TITLE_ENDPOINT="${{ secrets.MAIMAI_NET_API_TITLE_ENDPOINT }}"
 
       - name: Package Unsigned IPA
         run: |
@@ -126,7 +134,16 @@ jobs:
           EOF
 
       - name: Build Android APK
-        run: flutter build apk --split-per-abi --release
+        run: |
+          flutter build apk --split-per-abi --release \
+            --dart-define=MAIMAI_NET_API_AES_KEY="${{ secrets.MAIMAI_NET_API_AES_KEY }}" \
+            --dart-define=MAIMAI_NET_API_AES_IV="${{ secrets.MAIMAI_NET_API_AES_IV }}" \
+            --dart-define=MAIMAI_NET_API_OBFUSCATE_PARAM="${{ secrets.MAIMAI_NET_API_OBFUSCATE_PARAM }}" \
+            --dart-define=MAIMAI_NET_API_KEYCHIP_ID="${{ secrets.MAIMAI_NET_API_KEYCHIP_ID }}" \
+            --dart-define=MAIMAI_NET_API_SALT="${{ secrets.MAIMAI_NET_API_SALT }}" \
+            --dart-define=MAIMAI_NET_API_OPEN_GAME_ID="${{ secrets.MAIMAI_NET_API_OPEN_GAME_ID }}" \
+            --dart-define=MAIMAI_NET_API_CHIME_ENDPOINT="${{ secrets.MAIMAI_NET_API_CHIME_ENDPOINT }}" \
+            --dart-define=MAIMAI_NET_API_TITLE_ENDPOINT="${{ secrets.MAIMAI_NET_API_TITLE_ENDPOINT }}"
         env:
           KEYSTORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
           KEY_ALIAS: key

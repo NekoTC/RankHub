@@ -13,15 +13,35 @@ class MaimaiNetApiService {
 
   MaimaiNetApiService._internal() {
     _requestAdapter = RequestAdapter(
-      aesKey: 'a>32bVP7v<63BVLkY[xM>daZ1s9MBP<R',
-      aesIv: 'd6xHIKq]1J]Dt^ue',
-      obfuscateParam: 'B44df8yT',
-      keychipID: 'A63E-01C28055905',
-      salt: 'XcW5FW4cPArBXEk4vzKz3CIrMuA5EVVW',
-      openGameID: 'MAID',
-      chimeEndpoint: 'http://ai.sys-allnet.cn/wc_aime/api/get_data',
-      titleEndpoint:
-          'https://maimai-gm.wahlap.com:42081/Maimai2Servlet/mE2s3Jhd/',
+      aesKey: String.fromEnvironment(
+        'MAIMAI_NET_API_AES_KEY',
+        defaultValue: 'SBGA',
+      ),
+      aesIv: String.fromEnvironment(
+        'MAIMAI_NET_API_AES_IV',
+        defaultValue: 'SBGA',
+      ),
+      obfuscateParam: String.fromEnvironment(
+        'MAIMAI_NET_API_OBFUSCATE_PARAM',
+        defaultValue: 'SBGA',
+      ),
+      keychipID: String.fromEnvironment(
+        'MAIMAI_NET_API_KEYCHIP_ID',
+        defaultValue: 'SBGA',
+      ),
+      salt: String.fromEnvironment('MAIMAI_NET_API_SALT', defaultValue: 'SBGA'),
+      openGameID: String.fromEnvironment(
+        'MAIMAI_NET_API_OPEN_GAME_ID',
+        defaultValue: 'SBGA',
+      ),
+      chimeEndpoint: String.fromEnvironment(
+        'MAIMAI_NET_API_CHIME_ENDPOINT',
+        defaultValue: 'SBGA',
+      ),
+      titleEndpoint: String.fromEnvironment(
+        'MAIMAI_NET_API_TITLE_ENDPOINT',
+        defaultValue: 'SBGA',
+      ),
     );
     _technoKitchen = TechnoKitchen(_requestAdapter);
   }
