@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../controllers/account_controller.dart';
 import '../data/platforms_data.dart';
 import '../widgets/queue_status_card.dart';
-
+import './nearcade.dart';
 class ToolboxPage extends StatelessWidget {
   const ToolboxPage({super.key});
 
@@ -22,7 +22,20 @@ class ToolboxPage extends StatelessWidget {
         children: [
           // 排队状态卡片 - 默认展示
           const QueueStatusCard(),
-
+          // Nearcard 入口（对所有用户展示）
+          Card(
+            margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: ListTile(
+                leading: CircleAvatar(
+                backgroundColor: colorScheme.primaryContainer,
+                child: Icon(Icons.map_outlined, color: colorScheme.primary),
+                ),
+                title: const Text('nearcade'),
+                subtitle: const Text('音游街机地图'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Get.to(() => const NearcardPage()),
+              ),
+            ),
           // 平台自定义功能列表
           Obx(() {
             final currentAccount = controller.currentAccount;
